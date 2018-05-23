@@ -1,0 +1,385 @@
+#algoLbl {
+    margin-left: 100px;
+}
+
+.padding-top{
+    padding-top: 50px;
+}
+
+.blurred-back{
+    margin: 100px auto;
+    position: relative;
+    padding: 10px 5px;
+    background: hsla(0,90%,100%,0.9);
+    font-size: 20px;
+    font-family: 'Lora', serif;
+    line-height: 1.5;
+    border-radius: 10px;
+    width: 80%;
+    box-shadow: 5px 3px 30px black;
+    overflow: hidden;
+    color:black;
+}
+
+.divTransparent{
+    background-color: rgba(0,0,0,0);
+}
+
+div.input-group {
+    margin-bottom: 5px;
+}
+
+.btn-group.btn-group-toggle {
+    width: 1000px;
+    background-color: skyblue;
+}
+
+label.btn.btn-secondary.active {
+    background-color: azure;
+}
+
+.btn-secondary:hover
+{
+	background-color: azure;
+}
+
+
+#similarityScoreLbl {
+        display:block;
+        margin-left:145px;
+        margin-top:-80px;
+    }
+
+/* html,
+body {
+  background: lightgrey;
+  height: 100%;
+  width: 100%;
+} */
+
+/*  doughnut pie chart   */
+canvas {
+  background: white;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.chart-container {
+  padding: 1px;
+}
+
+.row > div {
+  background: #F0E68C;
+  border: 1px solid red;
+}
+
+
+tr {
+width: 100%;
+display: inline-table;
+table-layout: fixed;
+}
+
+table{
+ height:300px;              
+ display: -moz-groupbox;    
+}
+
+td#id1 {
+    width: 50px;
+    overflow:scroll
+}
+
+td#id4 {
+    width: 50px;
+}
+
+
+
+table#resTable {
+	table-layout: fixed;
+	width: 100%;
+}
+
+#id2 {
+	width: 100%;
+	overflow: auto;
+}
+
+#id3 {
+	width: 100%;
+	overflow: auto;
+}
+table#hdrTblRes {
+    table-layout: fixed;
+    background-color: white;
+    position: absolute;
+}
+div#resDiv {
+    padding-top: 50px;
+}
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #d3d3d3;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 110%;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+/* CSS for slider */
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal .w{
+  width: 50%;
+  height: 20%;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+
+}
+
+.close:hover,
+.close:focus {
+    color: #27ccd8;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Speech bubble */ 
+
+.circular-sb {
+  margin-left: 43%;
+  width: 175px;
+  height: 175px;
+  border: 5px solid #27ccd8;
+  padding: 40px 0px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 900;
+  font-family: arial;
+  background: #fff;
+  position: relative;
+  color: #27ccd8;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+     -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+   
+} 
+.circle1 {
+  border: 5px solid #27ccd8;
+  position: absolute;
+  width: 25px;
+  padding: 20px;
+  border-radius: 50%;
+  right: -15px;
+  bottom: 23px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+
+.circle1:before {
+  content: "";
+  position: absolute;
+  width: 25px;
+  padding: 20px;
+  border-radius: 50%;
+  right: 0px;
+  bottom: 0px;
+  background: #fff;
+}
+
+.circle2 {
+  border: 5px solid #27ccd8;
+  position: absolute;
+  width: 5px;
+  padding: 10px 15px;
+  border-radius: 50%;
+  right: -60px;
+  bottom: 5px;
+  background: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+/* border css */
+.row > div {
+    background: white;
+    border: 0px white;
+}
+
+/*Overlay CSS*/
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #C0C0C0;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #ffffff;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+
+/*Loder CSS*/
+.loader {
+	display:none;
+  position: fixed;
+  left: 600px;
+  top: 300px;
+  //margin-top: 300px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #F3FEFD;
+  border-right: 16px solid #AAF7F3;
+  border-bottom: 16px solid #3FBAB3  ;
+  border-left: 16px solid #638A88  ;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet" href="CSS/upload.css">
+<!--<link href="css/style.css" rel="stylesheet"/>-->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/JS/register.js"></script>
+
+</head>
+<body>
+	<div class="container blurred-back">
+
+		<form class="form">
+
+
+			<h1>Register</h1>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="username"
+					id="uname" maxlength="20" /> <label id="unameLbl"
+					style="color: red; margin-left: 10px; display: none; font-size: 14px;"><b>*Please
+						enter user name*</b></label> <label id="unameInvalidLbl"
+					style="color: red; margin-left: 10px; display: none; font-size: 14px;"><b>*User
+						name accepts only characters*</b></label> <label id="unameExistsLbl"
+					style="color: red; margin-left: 10px; display: none; font-size: 14px;"><b>*User
+						name exists, Please use different name*</b></label>
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" placeholder="password"
+					id="pwd" maxlength="15" /> <label id="pswdLbl"
+					style="color: red; margin-left: 10px; display: none; font-size: 14px;"><b>*Please
+						enter password*</b></label>
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control"
+					placeholder="confirm password" id="confirmpwd" maxlength="15" /> <label
+					id="cpswdLbl"
+					style="color: red; margin-left: 10px; display: none; font-size: 14px;"><b>*Please
+						confirm password*</b></label> <label id="pwdMatchLbl"
+					style="color: red; margin-left: 10px; display: none; font-size: 14px;"><b>*Passwords
+						do not match*</b></label>
+			</div>
+			<div class="form-group">
+				<input type="email" class="form-control"
+					placeholder="e-mail address" id="emailAddrTxt" maxlength="50">
+				<label id="emailInvalidLbl"
+					style="color: red; margin-left: 10px; display: none; font-size: 14px;"><b>*Please
+						enter valid e-mail address*</b></label>
+			</div>
+
+			<button class="btn btn-primary btn-block" id="register">Register</button>
+			<a class="btn btn-danger  btn-block" href="index.html">Cancel</a>
+
+
+		</form>
+	</div>
+</body>
+</html>
+

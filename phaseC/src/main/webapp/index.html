@@ -1,0 +1,55 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="/CSS/style.css" rel="stylesheet"/>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="/JS/login.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="863109792391-ui1s1psbi74kp49cnihkcukeekm5fjrs.apps.googleusercontent.com">
+
+<body>
+<div class="container ">
+    <div class="login-container">
+        <div id="output"></div>
+        <div class="avatar"> </div>
+        <div class="form-box">
+            <form name="login">
+                <input name="user" type="text" placeholder="username" id="uname" maxlength="40">
+                <input type="password" placeholder="password" name="pwd" id="password123" maxlength="15">
+                <label style="display:none; font-size:12px; color:red;" id ="loginErrLbl"></label> 
+                <a><br><br></a>
+                <a class="btn  btn-block btn-primary" type="submit" id="login">Login</a>
+                <a class="btn btn-info btn-block btn-danger" type="submit" href="register.html">Register</a>
+                <a class="g-signin2 btn btn-block" data-onsuccess="onSignIn" data-width="215" data-height="35" data-longtitle="true"></a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<link rel="stylesheet" href="/CSS/style.css">
+<div id="page-wrapper">
+</div>
+
+<script>
+
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+        $.ajax({
+            type: "POST",
+            url: "/googleSignIn/",
+            data: 'pwd='+ profile.getId() + '&uname='+ profile.getName() + '&email='+ profile.getEmail(),
+            success: function(){
+                window.location="../upload.html?username="+profile.getName();
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                window.location="../index.html";
+            }
+        });
+    }
+
+
+</script>

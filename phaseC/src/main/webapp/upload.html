@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="/JS/upload.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="CSS/upload.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="JS/gauge.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id"
+	content="863109792391-ui1s1psbi74kp49cnihkcukeekm5fjrs.apps.googleusercontent.com">
+
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid navbar-left">
+			<p id="helloMsg" class="navbar-text"></p>
+		</div>
+
+		<div class="container-fluid navbar-right">
+			<ul class="nav navbar-nav ">
+				<li class="nav-item"><a href="#upload"> Upload </a></li>
+			</ul>
+			<ul class="nav navbar-nav ">
+				<li class="nav-item"><a href="#compare"> Compare </a></li>
+			</ul>
+			<ul class="nav navbar-nav">
+				<li class="nav-item" id="logout"><a href=""
+					onclick="signOut();">
+						<div style="display: none" align="middle" class="g-signin2"
+							data-cookiepolicy='single_host_origin' data-onsuccess="onSignIn"></div>
+						<span class="glyphicon glyphicon glyphicon-log-out"></span> Logout
+				</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div id="upload"></div>
+	<div class="padding-top">
+		<div class="container blurred-back" id="sliderContainer">
+			<label>Set Threshold:</label><br />
+			<div class="slidecontainer">
+				<input type="range" min="1" max="100" class="slider" id="myRange"
+					onchange="setThreshold()">
+				<p>
+					Value: <span id="demo"></span>
+				</p>
+			</div>
+		</div>
+
+		<div class="container blurred-back" id="uploadDiv">
+			<div>
+				<label>Student Name</label>
+				<div class="input-group" id="studentNameLbl">
+					<div class="input-group-addon">
+						<span class="glyphicon glyphicon-user "> </span>
+					</div>
+					<input class="form-control " placeholder="name"
+						id="studentNameText" required />
+				</div>
+				<label id="enterStudentName"
+					style="color: red; margin-left: 10px; display: none; font-size: 14px;"><b>*Please
+						Enter the Student Name*</b></label>
+			</div>
+			<form id="upload-file-form">
+				<label id="upLbl" for="upload-file-input">Select File(s):</label> <input
+					class="form-control" id="upload-file-input" type="file"
+					name="uploadingFiles" accept=".py" multiple required /> <input
+					class="btn btn-primary btn-block" id="uploadBtn" name="submit"
+					type="submit" placeholder="Upload" style="margin-top: 6px" />
+				<!--<i class="fa fa-refresh" aria-hidden="true"  onclick ="reloadPage()"></i>-->
+				<!--<label id="fileUploadedMsg" style="color:green; margin-left:10px; display:none;"><b> File uploaded!!</b></label>-->
+				<!--<label id="noFileSelecLbl" style="color:red; margin-left:10px; display:none;"><b>*No file selected*</b></label>-->
+			</form>
+		</div>
+		<div id="studentPanel" class="container blurred-back"
+			style="height: 250px; overflow: auto;">
+			<label>Uploaded Files
+				<button
+					style="font-size: 18px; width: 150px; height: 30px; background-color: azure"
+					onclick="reloadPage()"">
+					Re-load <i class="fa fa-refresh" aria-hidden="true"></i>
+				</button>
+			</label>
+			<p>Click on the student name to view files</p>
+			<div id="divPanel"></div>
+		</div>
+		<div>
+			<br />
+		</div>
+		<div  class="container blurred-back" id="email" style="display:none" >
+		<p>Email Address:
+		<input name="emailAddrTxt" type="text" placeholder="e-mail address" id="emailAddrTxt" maxlength="50"  style="width:900px; background-color:azure; "/>
+        <a href="#">
+          <button type="button" class="btn btn-default" style="background-color:lightgray; height:40px ; width:100px padding-bottom: 5px;" onclick="emailReport()"><span class="glyphicon glyphicon-envelope"> Send </span></button>
+        </a>
+        </p>
+        <label style="display:none; font-size:16px; color:red;" id ="emailFailLbl"></label> 
+        <label style="display:none; font-size:16px; color:green;" id ="emailSuccLbl"></label>
+			
+		</div>
+		<div id="compare"></div>
+		<div class="container blurred-back" style="overflow: scroll;"
+			id="checkBoxDiv">
+			<div class="btn-group btn-group-toggle" data-toggle="buttons"
+				id ="checkBtn" style="width: 1000px;">
+				<label id= "checkBtnLbl1" class="btn btn-secondary active" style="width: 200px">
+					<input type="radio" class="algoSelec" name="options" id="option1"
+					autocomplete="off" value="Run All" checked onchange=onCheckBoxSelection()> <b>Run All</b>
+				</label> 
+				<label id= "checkBtnLbl2" class="btn btn-secondary" style="width: 200px"> <input
+					type="radio" class="algoSelec" name="options" id="option2"
+					autocomplete="off" value="LCS" onchange=onCheckBoxSelection()> <b>LCS </b>
+				</label> 
+				<label id= "checkBtnLbl3" class="btn btn-secondary" style="width: 200px"> <input
+					type="radio" class="algoSelec" name="options" id="option3"
+					autocomplete="off" value="Levenshtein Distance" onchange=onCheckBoxSelection()> <b>Levensthein
+						Distance</b>
+				</label> 
+				<label id= "checkBtnLbl4" class="btn btn-secondary" style="width: 200px"> <input
+					type="radio" class="algoSelec" name="options" id="option3"
+					autocomplete="off" value="AST Comparison" onchange=onCheckBoxSelection()> <b>AST
+						comparison </b>
+				</label> 
+				<label id= "checkBtnLbl5" class="btn btn-secondary" style="background-color: antiquewhite; width: 204px"> <input
+					type="radio" class="algoSelec" name="options" id="option4"
+					autocomplete="off" value="Moss" onchange=onCheckBoxSelection()> <b>Validate Using MOSS </b>
+				</label>
+			</div>
+			<button type="button" id="selAlgoBtn" class="btn btn-primary"
+				style="width: 100px; margin-left: 20px" onclick="compareFiles()">COMPARE
+			</button>
+		</div>
+	</div>
+
+	<div class="container blurred-back" id="compResDiv"
+		style="height: 350px">
+		<table class="table" id="compResTbl">
+			<thead class="thead-dark" style="background-color: azure">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Student1/Filename1</th>
+					<th scope="col">Student2/Filename2</th>
+					<th scope="col">View Report</th>
+				</tr>
+			</thead>
+			<tbody id="cmpTblBdy"
+				style="overflow-y: scroll; height: 200px; width: 100%; position: absolute">
+			</tbody>
+		</table>
+	</div>
+
+	<div class="container" id="backBtnDiv" style="display: none">
+		<button type="button" id="bckBtn" class="btn btn-primary"
+			style="width: 100px; margin-left: 20px" onclick="showAllDiv()">BACK
+		</button>
+	</div>
+	<br />
+	<br />
+	<br />
+	<div class="container" id="graphDiv" style="padding-bottom: 100px;">
+
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6" style="margin-right: 10px; font-size: 26px">
+
+				<label id="similarityScoreLbl">Similarity score: 80 %</label>
+			</div>
+		</div>
+		<div class="row" id ="graphDiag">
+			<div id="lcdChart1" class="col-sm-4"
+				style="background-color: white; border-color: white;"></div>
+
+			<div id="lcdChart" class="col-sm-4"
+				style="background-color: white; border-color: white;">
+				<canvas id="foo" height="358" width="716"
+					style="width: 358px; height: 179px;"></canvas>
+
+			</div>
+			<div id="lcdChart3" class="col-sm-4"
+				style="background-color: white; border-color: white;"></div>
+			
+		</div>
+	<br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    	<div class="row">
+			<div style="margin-right: 10px; font-size: 16px ; ">
+				<label id="similarityText" style="display:none;"></label>
+			</div>
+		</div>
+	</div>
+
+	<div id="resHdrdiv" class="container"
+		style="height: 500px; border: 20px solid #cecece; overflow-x: scroll; overflow-y: scroll; overflow-x: scroll;">
+		<table id="hdrTblRes" class="table">
+			<thead id="tblResultHdr">
+				<tr style="width: 400px">
+					<th style="width: 70px"></th>
+					<th id="colFileStudName1" style="width: 500px; overflow-x: scroll;"></th>
+					<th id="colFileStudName2" style="width: 500px; overflow-x: scroll;"></th>
+					<th style="width: 50px"><i class="fa fa-print"
+						style="font-size: 24px" onclick="printFunction()" id="printBtn""></i>
+					</th>
+				</tr>
+			</thead>
+		</table>
+		<div id="resDiv">
+			<table id="resTable" class="table" cellspacing:0px>
+			</table>
+		</div>
+	</div>
+	<div id="report"></div>
+
+	<div id="myModal" class="modal">
+		<div class="circular-sb">
+			<p class="close" id="errorSpeechBubl" onclick="closeErrorMsg()">&times;</p>
+			<div class="circle1"></div>
+			<div class="circle2"></div>
+		</div>
+
+	</div>
+	<div id="myNav" class="overlay" style="width: 0%;">
+		
+		<div>
+			<label
+				style="margin-left: 200px; margin-top: 900px; font-size: 16px; color: aqua">
+				Loading results!! Please wait </label>
+		</div>
+		<div id="loaderId" class="loader"></div>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+
+	<nav class="navbar navbar-inverse navbar-fixed-bottom">
+		<div class="container-fluid navbar-left">
+			<b></b>
+			<p id="usageCnt" class="navbar-text"></p>
+			</b>
+		</div>
+		<div class="container-fluid navbar-right">
+			<b></b>
+			<p id="systemStatus" class="navbar-text"></p>
+			</b>
+		</div>
+	</nav>
+</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$('#similarityScoreLbl').hide();
+				$('#resHdrdiv').hide();
+				$('#resDiv').hide();
+				$('#compResDiv').hide();
+				$('#checkBoxDiv').hide();
+				var uname = location.search.split("username=")[1];
+				if(uname.indexOf("%") > 0)
+				{
+					uname = uname.split("%")[0];
+					document.getElementById('helloMsg').innerHTML = "Hello "
+						+ uname;
+				}
+				else
+				{
+					document.getElementById('helloMsg').innerHTML = "Hello "
+						+ location.search.split("username=")[1];
+				}
+				
+				
+				$('a[href^="#"]').on('click', function(e) {
+					e.preventDefault();
+					var target = this.hash;
+					$target = $(target);
+					$('html, body').stop().animate({
+						'scrollTop' : $target.offset().top
+					//no need of parseInt here
+					}, 900, 'swing', function() {
+						window.location.hash = target;
+					});
+				});
+
+			});
+
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+
+	// $("#logout").click(function(event) {
+     //    $.ajax({
+	// 		type : "POST",
+	// 		url : "/invalidate/",
+	// 		cache : false,
+	// 		contentType : false,
+	// 		processData : false,
+	// 		success : function() {
+	// 			window.location = "index.html";
+	// 		},
+	// 		error : function(jqXHR, textStatus, errorThrown) {
+	// 			window.location = "upload.html";
+	// 		}
+	// 	});
+	// });
+	var modal = document.getElementById('myModal');
+
+	var totalFileCount = 0;
+	var studentFileCurrentVersionMap = {};
+	var studFileNameWithVersion = [];
+	var currentUploadedFileNames = [];
+	var versionNumberArr = [];
+	var versionNo = 0;
+
+	function closeErrorMsg() {
+		modal.style.display = "none";
+
+	}
+
+	$("#upload-file-form")
+			.submit(
+					function(e) {
+						document.getElementById("emailSuccLbl").style.display ="none";
+						document.getElementById("emailFailLbl").style.display ="none";
+
+						$('input[type="submit"]').attr("disabled", "disabled");
+						$("button").attr("disabled", "disabled")
+						currentUploadedFileNames = [];
+						$("#fileUploadedMsg").hide();
+						$("#noFileLbl").hide();
+						$("#enterStudentName").hide();
+						e.preventDefault();
+						var uploadfile = document
+								.getElementById('upload-file-input');
+						var fileInput = uploadfile.files;
+						var studentName = document
+								.getElementById("studentNameText").value;
+
+						if (studentName != "") {
+
+							if (fileInput.length > 0) {
+								totalFileCount += 1;
+								if (studentName in studentFileCurrentVersionMap) {
+									versionNo = studentFileCurrentVersionMap[studentName] + 1;
+								} else {
+									versionNo = 1;
+								}
+								var lineArr = [];
+								for (var i = 0; i < fileInput.length; i++) {
+									setupReader(fileInput[i], studentName,
+											versionNo, lineArr);
+								}
+								versionNumberArr.push(versionNo);
+								fileNameArr.push(studentName + "_version_"
+										+ versionNo);
+								studentNmeArr.push(studentName);
+								allFileArr.push(lineArr);
+
+								studentFileCurrentVersionMap[studentName] = versionNo;
+
+								studNameWithVersion = studentName + "-"
+										+ "version-" + versionNo
+
+								studFileNameWithVersion[totalFileCount - 1] = studNameWithVersion;
+
+								var sname = document
+										.getElementById("studentNameText").value;
+								$("#scoreTxt").hide();
+								frmdata = $('#upload-file-form')[0];
+								var data1 = new FormData(frmdata);
+								data1.append('studentName', sname);
+
+								$
+										.ajax({
+											type : "POST",
+											enctype : 'multipart/form-data',
+											url : "/uploadFile/",
+											data : data1,
+											cache : false,
+											contentType : false,
+											processData : false,
+											success : function(result) {
+
+												addNewFilesToMap(
+														studentName,
+														currentUploadedFileNames,
+														versionNo);
+												$("#fileUploadedMsg").show();
+												document
+														.getElementById('studentNameText').value = '';
+												document
+														.getElementById('upload-file-input').value = '';
+
+												$('#checkBoxDiv').show();
+												//enabling all the buttons
+												$('input[type="submit"]')
+														.removeAttr('disabled');
+												$("button").removeAttr(
+														"disabled");
+
+											}
+										});
+							} else {
+
+								$('input[type="submit"]')
+										.removeAttr('disabled');
+								$("button").removeAttr("disabled");
+
+								/* $("#noFileSelecLbl").show();
+								modal.style.display = "block";
+								document.getElementById("errorSpeechBubl").innerHTML = "Oops, No File Selelcteds"; */
+
+							}
+
+						} else {
+							$('input[type="submit"]').removeAttr('disabled');
+							$("button").removeAttr("disabled");
+
+							$("#enterStudentName").show();
+						}
+					});
+
+	function setupReader(file, studentName, versionNo, lineArr) {
+
+		var reader = new FileReader();
+		reader.onload = function(e) {
+
+			currentUploadedFileNames.push(file.name);
+
+			var lines = reader.result;
+			var res = lines.split(/\r\n|\n/);
+			//lineArr.push("");
+			var filename = '//***** FileName: ' + file.name + '*****';
+			lineArr.push(filename);
+			//lineArr.push("");
+			for (var j = 0; j < res.length; j++) {
+				lineArr.push(res[j]);
+			}
+		}
+		reader.readAsText(file);
+		reader.onerror = function(event) {
+			console.error("File could not be read! Code "
+					+ event.target.error.code);
+		}
+
+	}
+
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            auth2.disconnect();
+            gapi.auth2.getAuthInstance().currentUser.get().reloadAuthResponse();
+        });
+        $.ajax({
+            type : "POST",
+            url : "/invalidate/",
+            cache : false,
+            contentType : false,
+            processData : false,
+            success : function() {
+                window.location = "index.html";
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+                window.location = "upload.html";
+            }
+        });
+    }
+</script>

@@ -1,0 +1,4 @@
+
+Csquid:S1481")Remove this unused "list" local variable.(şû¥„úÿÿÿÿ
+lsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 46 to the 15 allowed.(™îÈûÿÿÿÿ
+Vsquid:UselessImportCheck"4Remove this unused import 'java.text.DecimalFormat'.(¤°Ó˜
